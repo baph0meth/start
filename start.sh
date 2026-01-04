@@ -1,11 +1,11 @@
 set -euo pipefail
 
-echo "🚀 Initial macOS setup for Apple Silicon"
+echo "Initial macOS setup for Apple Silicon"
 
-echo "📦 Installing Homebrew..."
+echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-echo "🔧 Configuring PATH..."
+echo "Configuring PATH..."
 
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -23,7 +23,7 @@ CLI_PACKAGES=(
   neovim
 )
 
-echo "📥 Installing CLI tools..."
+echo "Installing CLI tools..."
 brew install ${CLI_PACKAGES[@]}
 
 CASK_APPS=(
@@ -37,15 +37,15 @@ CASK_APPS=(
   lunar
 )
 
-echo "🖥 Installing applications..."
+echo "Installing applications..."
 brew install --cask ${CASK_APPS[@]}
 
-echo "⚙️  Configuring fzf..."
-"$(brew --prefix)"/opt/fzf/install --all --no-bash --no-fishecho "🧹 Cleaning up..."
+echo "Configuring fzf..."
+"$(brew --prefix)"/opt/fzf/install --all --no-bash --no-fishecho "Cleaning up..."
 
 brew cleanup
 
-echo "🐍 Setting Python aliases..."
+echo "Setting Python aliases..."
 {
   echo ''
   echo '# Python'
@@ -58,7 +58,7 @@ mkdir -p ~/.config/nvim
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 
-echo "⚙️  Configuring Python venv defaults..."
+echo "Configuring Python venv defaults..."
 
 {
   echo ''
@@ -68,4 +68,26 @@ echo "⚙️  Configuring Python venv defaults..."
   echo 'alias workon="source .venv/bin/activate"'
 } >>~/.zprofile
 
-echo "🎉 Setup complete. Restart Terminal to apply environment."
+echo "LazyConfiguring"
+
+mv ~/.config/nvim{,.bak}
+
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+
+rm -rf ~/.config/nvim/.git
+
+echo "Configuring Fonts"
+
+FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/0xProto.zip"
+TMP_DIR="$(mktemp -d)"
+curl -L "$FONT_URL" -o "$TMP_DIR/0xProto.zip"
+unzip -qq "$TMP_DIR/0xProto.zip" -d "$TMP_DIR/0xProto"
+mkdir -p ~/Library/Fonts
+cp -v "$TMP_DIR"/0xProto/*.ttf ~/Library/Fonts/
+rm -rf "$TMP_DIR"
+
+echo "Setup complete. Restart Terminal to apply environment."
