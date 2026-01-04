@@ -53,7 +53,6 @@ echo "Setting Python aliases..."
 
 source ~/.zprofile
 mkdir -p ~/.config/nvim
-brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 
 echo "Configuring Python venv defaults..."
@@ -77,15 +76,5 @@ mv ~/.cache/nvim{,.bak}
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 rm -rf ~/.config/nvim/.git
-
-echo "Configuring Fonts"
-
-FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/0xProto.zip"
-TMP_DIR="$(mktemp -d)"
-curl -L "$FONT_URL" -o "$TMP_DIR/0xProto.zip"
-unzip -qq "$TMP_DIR/0xProto.zip" -d "$TMP_DIR/0xProto"
-mkdir -p ~/Library/Fonts
-cp -v "$TMP_DIR"/0xProto/*.ttf ~/Library/Fonts/
-rm -rf "$TMP_DIR"
 
 echo "Setup complete. Restart Terminal to apply environment."
