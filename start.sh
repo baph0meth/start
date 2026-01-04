@@ -41,7 +41,7 @@ echo "Installing applications..."
 brew install --cask ${CASK_APPS[@]}
 
 echo "Configuring fzf..."
-"$(brew --prefix)"/opt/fzf/install --all --no-bash --no-fishecho "Cleaning up..."
+"$(brew --prefix)"/opt/fzf/install --all --no-bash "Cleaning up..."
 
 brew cleanup
 
