@@ -17,7 +17,6 @@ CLI_PACKAGES=(
   python
   node
   tmux
-  fzf
   ripgrep
   virtualenv
   neovim
