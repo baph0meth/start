@@ -31,7 +31,7 @@ CASK_APPS=(
   google-chrome
   caffeine
   docker
-  chatgpr
+  chatgpt
   openvpn-connect
   zoom
   lunar
